@@ -4,9 +4,9 @@
   "description": "Capture AI & human conversations as capsules and reuse context instantly across ChatGPT, Claude, Gemini, Perplexity and DeepSeek.",
   "version": "2.5",
   "icons": {
-    "16": "ExtensionLogo.png",
-    "48": "ExtensionLogo.png",
-    "128": "ExtensionLogo.png"
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "permissions": [
     "activeTab",
@@ -69,24 +69,9 @@
     },
     {
       "resources": [
-        "perplexity-inserter.js",
-        "capsule.png"
+        "perplexity-inserter.js"
       ],
       "matches": [
-        "https://www.perplexity.ai/*"
-      ]
-    },
-    {
-      "resources": [
-        "capsule.png"
-      ],
-      "matches": [
-        "https://chat.openai.com/*",
-        "https://chatgpt.com/*",
-        "https://gemini.google.com/*",
-        "https://aistudio.google.com/*",
-        "https://claude.ai/*",
-        "https://chat.deepseek.com/*",
         "https://www.perplexity.ai/*"
       ]
     }
@@ -101,9 +86,9 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "ExtensionLogo.png",
-      "48": "ExtensionLogo.png",
-      "128": "ExtensionLogo.png"
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
   },
   "content_scripts": [
