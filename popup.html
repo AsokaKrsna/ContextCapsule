@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- Tutorial Overlay -->
+    <div id="tutorialOverlay" class="tutorial-overlay hidden">
+      <div class="tutorial-backdrop"></div>
+      <button id="closeTutorial" class="close-tutorial">✕</button>
+      <div id="tutorialArrow" class="tutorial-arrow"></div>
+      <div id="tutorialBox" class="tutorial-box">
+        <div class="tutorial-content">
+          <h3 id="tutorialTitle"></h3>
+          <p id="tutorialText"></p>
+          <div class="tutorial-nav">
+            <button id="prevStep" class="tutorial-nav-btn">← Previous</button>
+            <span id="tutorialProgress"></span>
+            <button id="nextStep" class="tutorial-nav-btn">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS VIEW -->
+    <div id="settingsView" class="hidden">
+      <h1>Settings</h1>
+      <div class="subtitle">Configure your LLM Provider</div>
+
+      <div class="auth-section" style="text-align: left; margin-bottom: 12px;">
+        <label for="providerSelect" class="section-label">Provider</label>
+        <select id="providerSelect" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 6px;">
+          <option value="groq">Groq API</option>
+          <option value="ollama">Ollama (Local)</option>
+        </select>
+
+        <div id="groqSettings">
+          <label for="apiKey" class="section-label">Groq API Key</label>
+          <input id="apiKey" type="password" placeholder="gsk_..." style="width: 100%; margin-bottom: 12px;" />
+          
+          <label for="groqModel" class="section-label">Model Name</label>
+          <input id="groqModel" type="text" placeholder="llama3-70b-8192" style="width: 100%; margin-bottom: 12px;" />
+        </div>
+
+        <div id="ollamaSettings" class="hidden">
+          <label for="ollamaUrl" class="section-label">Ollama URL</label>
+          <input id="ollamaUrl" type="text" placeholder="http://localhost:11434" style="width: 100%; margin-bottom: 12px;" />
+          
+          <label for="ollamaModel" class="section-label">Model Name</label>
+          <input id="ollamaModel" type="text" placeholder="llama3" style="width: 100%; margin-bottom: 12px;" />
+        </div>
+
+        <button id="saveSettingsBtn" class="btn-primary">Save Settings</button>
+      </div>
+      <button id="backFromSettings" class="back-to-actions">← Back</button>
+    </div>
+
+    <!-- ACTIONS -->
+    <div id="actionView">
+      <button id="helpButton" class="help-circle" title="How to use">?</button>
+      <h1>ContextCapsule</h1>
+      <div class="subtitle">Capture and transfer chat state across AI platforms</div>
+
+      <input id="capsuleTag" type="text" placeholder="Name your capsule" style="margin-top: 16px;" />
+
+      <div class="actions main-actions-grid">
+        <button id="generate" class="btn-primary has-tooltip" data-tooltip="Create reusable AI context from this chat">
+          <span id="genSpinner" class="spinner hidden"></span>
+          <span id="genText">Generate Capsule</span>
+        </button>
+        <div class="sub-actions">
+          <button id="viewCapsules" class="btn-secondary">Transfer Capsules</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPSULES VIEW -->
+    <div id="capsulesView" class="hidden">
+      <div class="view-header-with-tier">
+        <button id="backToActions" class="back-to-actions-top">← Back</button>
+      </div>
+      <div class="capsules-header">
+        <div class="header-titles">
+          <h2>My Capsules</h2>
+          <div class="capsules-instruction">Inject into the active chat or drag and drop.</div>
+        </div>
+        <div style="display: flex; gap: 4px; align-items: center;">
+          <button id="refreshCapsules" class="btn-refresh" title="Sync">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <input id="capsuleSearch" type="text" placeholder="Search by tag or content..." />
+      </div>
+
+      <div class="list-wrapper">
+        <div id="scrollUpBtn" class="scroll-arrow scroll-up hidden">▲</div>
+        <div id="capsulesListContainer" class="capsules-list"></div>
+        <div id="scrollDownBtn" class="scroll-arrow scroll-down hidden">▼</div>
+      </div>
+    </div>
+
+    <!-- VERSION CHOICE -->
+    <div id="versionChoiceView" class="hidden">
+      <h1 class="simple-h1">Existing Capsule</h1>
+      <div class="subtitle">A capsule is already mapped to this conversation. What would you like to do?</div>
+      <input id="newCapsuleTag" type="text" placeholder="New Capsule Tag (e.g. debugging-v2)" />
+
+      <div class="actions">
+        <button id="newVersionBtn" class="btn-primary">
+          <span id="verSpinner" class="spinner hidden"></span>
+          <span id="verText">New Version</span>
+        </button>
+        <button id="newCapsuleBtn" class="btn-secondary">
+          <span id="newCapSpinner" class="spinner hidden"></span>
+          <span id="newCapText">New Capsule</span>
+        </button>
+      </div>
+
+      <button id="backFromVersion" class="back-to-actions">← Back</button>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">
+        ContextCapsule · Open Source
+      </div>
+      <button id="openSettingsBtn" class="footer-btn btn-logout">⚙️ Settings</button>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

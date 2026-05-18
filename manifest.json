@@ -1,0 +1,141 @@
+{
+  "manifest_version": 3,
+  "name": "ContextCapsule",
+  "description": "Capture AI & human conversations as capsules and reuse context instantly across ChatGPT, Claude, Gemini, Perplexity and DeepSeek.",
+  "version": "2.5",
+  "icons": {
+    "16": "ExtensionLogo.png",
+    "48": "ExtensionLogo.png",
+    "128": "ExtensionLogo.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://api.groq.com/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*",
+    "https://aistudio.google.com/*",
+    "https://claude.ai/*",
+    "https://chat.deepseek.com/*",
+    "https://www.perplexity.ai/*",
+    "https://*.google.com/*",
+    "https://*.googleusercontent.com/*",
+    "https://*.myhuaweicloud.com/*",
+    "https://*.s3.amazonaws.com/*",
+    "https://ppl-ai-file-upload.s3.amazonaws.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "gpt-inserter.js",
+        "gpt-pdf-interceptor.js"
+      ],
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "gemini-inserter.js"
+      ],
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://aistudio.google.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "claude-inserter.js"
+      ],
+      "matches": [
+        "https://claude.ai/*"
+      ]
+    },
+    {
+      "resources": [
+        "ds-inserter.js"
+      ],
+      "matches": [
+        "https://chat.deepseek.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "perplexity-inserter.js",
+        "capsule.png"
+      ],
+      "matches": [
+        "https://www.perplexity.ai/*"
+      ]
+    },
+    {
+      "resources": [
+        "capsule.png"
+      ],
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*",
+        "https://aistudio.google.com/*",
+        "https://claude.ai/*",
+        "https://chat.deepseek.com/*",
+        "https://www.perplexity.ai/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; connect-src http://localhost:* http://127.0.0.1:* https://api.groq.com https://huggingface.co https://*.huggingface.co https://*.hf.co https://cdn.jsdelivr.net 'self';"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "ExtensionLogo.png",
+      "48": "ExtensionLogo.png",
+      "128": "ExtensionLogo.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*",
+        "https://aistudio.google.com/*",
+        "https://claude.ai/*",
+        "https://chat.deepseek.com/*",
+        "https://www.perplexity.ai/*"
+      ],
+      "js": [
+        "content-utils.js",
+        "extractors/chatgpt-extractor.js",
+        "platform-capturers.js",
+        "capturers/chatgpt-capturer.js",
+        "capturers/gemini-capturer.js",
+        "capturers/claude-capturer.js",
+        "capturers/perplexity-capturer.js",
+        "capturers/deepseek-capturer.js",
+        "platform-adapters.js",
+        "platform-injectors.js",
+        "injectors/chatgpt-injector.js",
+        "injectors/gemini-injector.js",
+        "injectors/claude-injector.js",
+        "injectors/perplexity-injector.js",
+        "injectors/deepseek-injector.js",
+        "jspdf.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}
